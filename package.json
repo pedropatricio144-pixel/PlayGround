@@ -1,0 +1,8 @@
+{
+  "name": "bluefront-echoes",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Co-op boss arena with lives, revive, and escalating arsenal",
+  "scripts": { "start": "node server.js" },
+  "dependencies": { "ws": "^8.18.0" }
+}

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>BLUEFRONT // Echoes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game"></div>
+  <div class="scanlines"></div>
+  <header class="topbar">
+    <div class="brand"><div class="brand-icon">B<span>✦</span></div><div><b>BLUEFRONT</b><small>CO-OP BOSS HUNT // SECTOR 07</small></div></div>
+    <div class="connection"><i></i><span id="net-status">CONECTANDO À REDE</span><span class="sep">/</span><span>REGIÃO EU-WEST</span></div>
+    <button class="icon-btn" id="sound-btn" title="Som">♫</button>
+  </header>
+  <section class="boss-panel"><div class="boss-title"><span class="eyebrow">ALVO PRIORITÁRIO</span><b>THE HOLLOW WARDEN</b><span class="boss-phase">FASE <strong id="phase">01</strong> <i>▴</i></span></div><div class="boss-health"><div class="bar"><i id="boss-bar"></i></div><div class="boss-meta"><span>INTEGRIDADE <b id="boss-hp-label">100%</b></span><span id="boss-state">ENTIDADE ATIVA</span></div></div></section>
+  <aside class="left-hud"><div class="hud-label">ESQUADRÃO <span id="team-count">01/04</span></div><div id="squad-list"></div><div class="mission-card"><div class="mission-head"><span>◈</span> OBJETIVO DA OPERAÇÃO</div><b id="objective">DERRUBE O GUARDIÃO</b><p>Elimine a entidade e saqueie o núcleo para garantir moedas azuis.</p><div class="wave"><span>AMEAÇA</span><b id="wave-number">01</b><div class="wave-dots"><i></i><i></i><i></i></div></div></div></aside>
+  <aside class="right-hud"><div class="minimap-frame"><div class="mini-head">RASTREADOR <span>● AO VIVO</span></div><div id="minimap"><div class="map-grid"></div><div class="map-arena"></div><div id="map-points"></div><div class="map-player"></div><div class="map-boss">◆</div></div><div class="coords"><span>SETOR // 07-B</span><span id="coords">X +00.0 / Z +00.0</span></div></div><div class="loot-card"><span class="eyebrow">CARTEIRA</span><div class="coins">◉ <b id="coins">120</b><small>MOEDAS AZUIS</small></div><div class="loot-line"><span>ARMAMENTO</span><b id="weapon-name">FIELD RIFLE <em>T1</em></b></div></div></aside>
+  <div class="reticle"><i></i><i></i><i></i><i></i><b></b></div>
+  <div class="hit-flash" id="hit-flash"></div>
+  <div class="toast" id="toast"></div>
+  <div class="boss-warning" id="boss-warning"><span>⚠</span> WARDEN PREPARA UM GOLPE <i>— DESVIE!</i></div>
+  <footer class="bottom-hud"><div class="player-card"><div class="avatar">R<span>07</span></div><div class="player-info"><div><b id="player-name">RANGER</b><span class="class-tag">VANGUARDA</span></div><div class="health-track"><i id="health-bar"></i></div><small><b id="hp-label">100</b> HP <span>·</span> <b id="lives-label">♥ ♥ ♥</b></small></div></div><div class="abilities"><div class="ability"><kbd>Q</kbd><div class="ability-icon arc">✦</div><span>ARC BLAST</span></div><div class="ability"><kbd>R</kbd><div class="ability-icon dash">↗</div><span>PHASE DASH</span></div><div class="ability"><kbd>E</kbd><div class="ability-icon revive">✚</div><span>REVIVER</span></div></div><div class="controls"><div><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><span>MOVER</span></div><div><kbd>MOUSE</kbd><span>MIRAR / DISPARAR</span></div><button id="shop-open"><span>⌘</span> ARSENAL <kbd>B</kbd></button></div></footer>
+  <div class="crosshair-hint" id="crosshair-hint">CLIQUE NA ARENA PARA ATIVAR O COMBATE</div>
+  <div class="overlay" id="shop-overlay"><div class="shop-window"><div class="shop-top"><div><span class="eyebrow">ENTRE FASES // BASE AVANÇADA</span><h1>ARSENAL <i>DE CAMPO</i></h1></div><button class="close-btn" id="shop-close">✕</button></div><div class="shop-balance">◉ <b id="shop-coins">120</b> <span>MOEDAS AZUIS DISPONÍVEIS</span></div><div class="shop-categories"><button class="active" data-filter="all">TODOS</button><button data-filter="military">MILITARES</button><button data-filter="mystic">MÍSTICOS</button></div><div class="weapon-grid" id="weapon-grid"></div><div class="shop-foot"><span>✦ ARMAS ADQUIRIDAS SÃO MANTIDAS APÓS RESSURREIÇÃO</span><span>ESC PARA FECHAR</span></div></div></div>
+  <div class="overlay intro-overlay" id="intro-overlay"><div class="intro-card"><div class="intro-mark">B<span>✦</span></div><span class="eyebrow">OPERAÇÃO // ECHOES</span><h1>ENCARE O <i>VAZIO.</i></h1><p>O Guardião despertou. Reúna sua equipe, sobreviva à arena e reivindique o núcleo.</p><div class="intro-stats"><div><b>03</b><small>VIDAS INICIAIS</small></div><div><b>04</b><small>ESQUADRÃO CO-OP</small></div><div><b>∞</b><small>RESSURREIÇÃO</small></div></div><button id="deploy-btn">INICIAR OPERAÇÃO <span>→</span></button><small class="intro-note">WASD mover · Mouse mirar / disparar · Q habilidade · B arsenal</small></div></div>
+  <div class="overlay down-overlay" id="down-overlay"><div class="down-card"><span class="eyebrow">SINAL DE VIDA PERDIDO</span><h1>VOCÊ VIROU <i>ESPECTRO.</i></h1><p>Um aliado pode te trazer de volta: aproxime-se e pressione E para agarrar, depois pressione E mais 3 vezes.</p><div class="down-mark">✦</div><div class="revive-meter"><i id="revive-progress"></i></div><span id="revive-status">AGUARDANDO UM ALIADO...</span></div></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
